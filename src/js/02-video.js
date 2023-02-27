@@ -11,11 +11,14 @@ function saveCurrentTime(event) {
     const timeValue = JSON.stringify(event);
     localStorage.setItem(STORAGE_KEY, timeValue);
 }
-console.log(localStorage);
-const getCurrentTime = localStorage.getItem(STORAGE_KEY);
-const parsedLocalStorage = JSON.parse(getCurrentTime);
+let getCurrentTime = localStorage.getItem(STORAGE_KEY);
+if (!getCurrentTime) {
+    getCurrentTime = {seconds: 0}
+} else {
+    getCurrentTime = JSON.parse(getCurrentTime)
+}
 
-player.setCurrentTime(parsedLocalStorage.seconds !== 0 ? parsedLocalStorage.seconds : 0).then(function (seconds) {
+player.setCurrentTime(getCurrentTime.seconds).then(function (seconds) {
     
     }
     // seconds = the actual time that the player seeked to
