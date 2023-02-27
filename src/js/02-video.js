@@ -15,9 +15,11 @@ console.log(localStorage);
 const getCurrentTime = localStorage.getItem(STORAGE_KEY);
 const parsedLocalStorage = JSON.parse(getCurrentTime);
 
-player.setCurrentTime(parsedLocalStorage.seconds).then(function(seconds) {
+player.setCurrentTime(parsedLocalStorage.seconds !== 0 ? parsedLocalStorage.seconds : 0).then(function (seconds) {
+    
+    }
     // seconds = the actual time that the player seeked to
-}).catch(function(error) {
+).catch(function(error) {
     switch (error.name) {
         case 'RangeError':
             // the time was less than 0 or greater than the video’s duration
